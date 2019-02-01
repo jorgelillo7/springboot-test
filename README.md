@@ -17,6 +17,7 @@ console -> http://localhost:8080/h2-console
 jdbc url -> use: jdbc:h2:mem:testdb
 
 ## Paths
+You can use the collection `Students.postman_collection.json` from `src/main/resources`
 - `GET` /student
 
 Response:
