@@ -11,6 +11,17 @@ Students CRUD
 - H2
 - JPA
 
+# Setup
+
+Building this project:
+```bash
+mvn clean install
+```
+Start Spring Boot project:
+```bash
+java -jar target/tutorial-0.0.1-SNAPSHOT.jar
+```
+
 #h2:
 console -> http://localhost:8080/h2-console
 
