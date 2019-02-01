@@ -1,13 +1,13 @@
 package com.jlillo.tutorial.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
+@Table(name = "student")
 @Entity
 public class Student {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "STUDENT_SEQ")
+    @SequenceGenerator(sequenceName = "student_seq", name = "STUDENT_SEQ")
     private Long id;
     private String name;
     private String passportNumber;

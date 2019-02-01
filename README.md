@@ -1,5 +1,5 @@
 # springboot-test
-POC, playing with Sprimg Boot. 
+POC, playing with Spring Boot. 
 
 Students CRUD
 
@@ -10,6 +10,11 @@ Students CRUD
 - Maven
 - H2
 - JPA
+
+#h2:
+console -> http://localhost:8080/h2-console
+
+jdbc url -> use: jdbc:h2:mem:testdb
 
 ## Paths
 - `GET` /student
