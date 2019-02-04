@@ -22,6 +22,32 @@ Start Spring Boot project:
 java -jar target/tutorial-0.0.1-SNAPSHOT.jar
 ```
 
+#docker
+see active containers
+```bash
+docker ps
+```
+build image
+```bash
+docker build --tag=studenttest .
+```
+see images
+```bash
+docker images
+```
+run image (sync)
+```bash
+docker run -p 8080:8080 studenttest
+```
+run image (async)
+```bash
+docker run -d --name springapi -p 8080:8080 studenttest
+```
+logs
+```bash
+docker logs -f springapi
+```
+
 #h2:
 console -> http://localhost:8080/h2-console
 
