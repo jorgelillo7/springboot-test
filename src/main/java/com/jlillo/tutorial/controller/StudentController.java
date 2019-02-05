@@ -34,7 +34,7 @@ public class StudentController {
         LOGGER.info("Start getStudentbyId: " + studentId);
         Optional<Student> student = studentRepository.findById(studentId);
         if (!student.isPresent()) {
-            throw new StudentNotFoundException("id-" + studentId);
+            throw new StudentNotFoundException("Student with id:" + studentId + "not found");
         }
 
         return student.get();
