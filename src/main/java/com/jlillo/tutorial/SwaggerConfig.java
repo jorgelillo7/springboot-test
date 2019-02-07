@@ -18,8 +18,9 @@ public class SwaggerConfig extends WebMvcConfigurationSupport {
     @Bean
     public Docket studentApi() {
         return new Docket(DocumentationType.SWAGGER_2)
-                .select()                 .apis(RequestHandlerSelectors.basePackage("com.jlillo.tutorial.controller"))
-                .paths(regex("/student.*"))
+                .select()
+                .apis(RequestHandlerSelectors.basePackage("com.jlillo.tutorial.controller"))
+                .paths(PathSelectors.any())
                 .build();
 
     }
