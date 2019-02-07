@@ -57,6 +57,21 @@ jdbc url -> use: jdbc:h2:mem:testdb
 - check is ok -> http://localhost:8080/v2/api-docs
 - swagger ui -> http://localhost:8080/swagger-ui.html
 
+#jacoco coverage:
+- first launch 
+```bash
+mvn test
+```
+- go to `target/site/jacoco/index.html`
+you will see a report of your code coverage
+
+- in `pom.xml` you can set the % of minumun coverage acceptable:
+```
+<limit implementation="org.jacoco.report.check.Limit">
+      <minimum>75%</minimum>
+</limit>
+```
+
 ## Paths
 You can use the collection `Spring Boot Template.postman_collection.json` from `src/main/resources`
 - `GET` /student
