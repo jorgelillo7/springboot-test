@@ -8,7 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.jlillo.tutorial.repository.StudentRepository;
-import com.jlillo.tutorial.exception.StudentNotFoundException;
+import com.jlillo.tutorial.exception.NotFoundException;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
@@ -23,17 +23,12 @@ public class StudentController {
     @Autowired
     StudentRepository studentRepository;
 
-    @GetMapping("/hello")
-    public String sayHello(@RequestParam(value = "name") String name, @RequestParam(value = "color") String color) {
-        return String.format("Hello %s, your color is: %s", name, color);
-    }
-
     @GetMapping("/{id}")
     public Student getStudentbyId(@PathVariable long id) {
         LOGGER.info(String.format("Start getStudentbyId: %s", id));
         Optional<Student> student = studentRepository.findById(id);
         if (!student.isPresent()) {
-            throw new StudentNotFoundException(String.format("Student with id: %s not found", id));
+            throw new NotFoundException(String.format("Student with id: %s not found", id));
         }
 
         return student.get();
@@ -51,7 +46,7 @@ public class StudentController {
         Optional<Student> studentOptional = studentRepository.findById(id);
 
         if (!studentOptional.isPresent()){
-            throw new StudentNotFoundException(String.format("Student with id: %s not found", id));
+            throw new NotFoundException(String.format("Student with id: %s not found", id));
         }
         studentRepository.deleteById(id);
     }
@@ -74,7 +69,7 @@ public class StudentController {
         Optional<Student> studentOptional = studentRepository.findById(id);
 
         if (!studentOptional.isPresent()){
-            throw new StudentNotFoundException(String.format("Student with id: %s not found", id));
+            throw new NotFoundException(String.format("Student with id: %s not found", id));
         }
 
         studentRepository.save(student);

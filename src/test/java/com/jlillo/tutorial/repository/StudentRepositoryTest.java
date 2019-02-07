@@ -44,7 +44,7 @@ public class StudentRepositoryTest {
         entityManager.flush();
         return student;
     }
-        
+
     @Test
     public void whenFindByIdReturnStudent() {
         Student student = givenStudent("pepe", "545454545");
