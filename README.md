@@ -58,7 +58,7 @@ jdbc url -> use: jdbc:h2:mem:testdb
 - swagger ui -> http://localhost:8080/swagger-ui.html
 
 ## Paths
-You can use the collection `Students.postman_collection.json` from `src/main/resources`
+You can use the collection `Spring Boot Template.postman_collection.json` from `src/main/resources`
 - `GET` /student
 
 Response:
