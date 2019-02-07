@@ -20,21 +20,20 @@ import java.util.Optional;
 public class StudentController {
     private final static  Logger LOGGER = LoggerFactory.getLogger(StudentController.class);
 
-
     @Autowired
     StudentRepository studentRepository;
 
     @GetMapping("/hello")
-    public String sayHello(@RequestParam(value = "name") String name) {
-        return "Hello " + name + "!";
+    public String sayHello(@RequestParam(value = "name") String name, @RequestParam(value = "color") String color) {
+        return String.format("Hello %s, your color is: %s", name, color);
     }
 
-    @GetMapping("/{studentId}")
-    public Student getStudentbyId(@PathVariable long studentId) {
-        LOGGER.info("Start getStudentbyId: " + studentId);
-        Optional<Student> student = studentRepository.findById(studentId);
+    @GetMapping("/{id}")
+    public Student getStudentbyId(@PathVariable long id) {
+        LOGGER.info(String.format("Start getStudentbyId: %s", id));
+        Optional<Student> student = studentRepository.findById(id);
         if (!student.isPresent()) {
-            throw new StudentNotFoundException("Student with id:" + studentId + "not found");
+            throw new StudentNotFoundException(String.format("Student with id: %s not found", id));
         }
 
         return student.get();
@@ -42,16 +41,24 @@ public class StudentController {
 
     @GetMapping()
     public List<Student> retrieveAllStudents() {
-        return (List<Student>) studentRepository.findAll();
+        LOGGER.info("Start retrieveAllStudents");
+        return studentRepository.findAll();
     }
 
     @DeleteMapping("/{id}")
     public void deleteStudent(@PathVariable long id) {
+        LOGGER.info(String.format("Start deleteStudent: %s", id));
+        Optional<Student> studentOptional = studentRepository.findById(id);
+
+        if (!studentOptional.isPresent()){
+            throw new StudentNotFoundException(String.format("Student with id: %s not found", id));
+        }
         studentRepository.deleteById(id);
     }
 
     @PostMapping("")
     public ResponseEntity<Object> createStudent(@RequestBody Student student) {
+        LOGGER.info("Start createStudent");
         Student savedStudent = studentRepository.save(student);
 
         URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
@@ -63,13 +70,12 @@ public class StudentController {
 
     @PutMapping("/{id}")
     public ResponseEntity<Object> updateStudent(@RequestBody Student student, @PathVariable long id) {
-
+        LOGGER.info(String.format("Start updateStudent: %s", id));
         Optional<Student> studentOptional = studentRepository.findById(id);
 
-        if (!studentOptional.isPresent())
-            return ResponseEntity.notFound().build();
-
-
+        if (!studentOptional.isPresent()){
+            throw new StudentNotFoundException(String.format("Student with id: %s not found", id));
+        }
 
         studentRepository.save(student);
 

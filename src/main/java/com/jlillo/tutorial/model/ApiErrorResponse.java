@@ -5,9 +5,7 @@ public class ApiErrorResponse {
     private String code;
     private String msg;
 
-    public ApiErrorResponse() {
-
-    }
+    public ApiErrorResponse() {}
 
     public ApiErrorResponse(String code, String msg) {
         this.code = code;
